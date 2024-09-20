@@ -16,6 +16,9 @@ public class GithubTest {
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         Login3 login = new Login3();
+        
+         System.out.println("Please enter your name :");
+        login.FirstandLastName();
     
           System.out.println("Please create username :");
          login.registerUser();
