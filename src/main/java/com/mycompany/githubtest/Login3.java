@@ -11,33 +11,24 @@ import java.util.Scanner;
  * @author RC_Student_lab
  */
 public class Login3 {
-    public String FirstandLastName(){
-         Scanner sc= new Scanner(System.in);
-     String userFirstname=sc.next();
-     System.out.println("Please enter last name");
-       String userLastName=sc.next();
-       
-     return userFirstname+" "+userLastName;   
-    }  
-public boolean CheckUserName(){
-     Scanner sc= new Scanner(System.in);
-      String username=sc.next();
-          boolean isright = false;
+
+    private String firstname, lastname, Username, Password;
+    
   
-if(username.contains("_")) {
-  
-    isright = true;
-} 
-else {
-    return isright;
-}
-return isright;
+    
+    
+public boolean CheckUserName(String username){
+    //returns true if username contains following requirements
+    return (username.contains("_") && username.length()<=5);   
      }
-     public boolean CheckPasswordComplexity(){
-          Scanner sc= new Scanner(System.in);
-          String Password =sc.next();
+
+
+
+     public boolean CheckPasswordComplexity(String Password){
+         //Declaration of boolean
          boolean checked = false;
        
+         //This condition returns true if following conditions are met 
          if (Password.length()>8 && Password.matches(".*[A-Z].*")
             && Password.matches(".*[0-9].*") &&  Password.contains("@"  )||
          Password.contains("#")|| Password.contains("$")|| Password.contains("!")
@@ -45,62 +36,63 @@ return isright;
         || Password.contains("~")
         || Password.contains("_")){
              checked = true;
+             
          }
+         
+         //Returns boolean  true or false
      return checked; 
      
      }
-     public void registerUser(){
+     public String registerUser(String username,String Password){
+         
+      String message="";
+         
+         //C 
+         if(CheckUserName(username)){
+           System.out.println("                       ");
+         System.out.println("Username captured");
          
          
-         
-         if(CheckUserName()){
-         System.out.println("Username successfully captured");
-         System.out.println("Please enter password :");
-         
-         if(CheckPasswordComplexity()){
-         System.out.println("Password succesfully captured");
-         
-        
-        }
-         else {
-              System.out.println("Password is not correctly formatted,please ensure that the password contains at least 8 characters, a capital letter, a number and a special character.");
-               System.out.println("Please try again");
-         }
-        }
-         else {
-              System.out.println("“Username is not correctly formatted,please ensure that your username contains an underscore and is nomore than 5characters in length");
-         }
-         
-          
-                
-     }
-     public boolean loginUser(){
-       boolean checked = false;
-      String Username;
-       String Passowrd;
-        
-         if(CheckUserName()&&CheckPasswordComplexity()){
-         System.out.println("“Welcome" +  FirstandLastName() + "it is great tosee you again");
-        }
-         else{
-             System.out.println("Username orpassword incorrect,please try again”");
-         }
+         if(CheckPasswordComplexity(Password)){
+       System.out.println("Password captured");
+        System.out.println("User is registered successfully");
+        System.out.println("                       ");
        
-      
-         return checked;
-          }
-
-    
+        }
+        }
+         else {
+         System.out.println("Username is not correctly formatted,please ensure that your username contains an underscore and is no more than 5 characters in length");
+         System.out.println("OR");
+         System.out.println("The password contains at least 8 characters, a capital letter, a number and a special character.");
+         
+         } return username+" "+Password;
+     } 
+     
+     
+     
+     public boolean loginUser(String createUsername,String createPassword, String password ,String name){
+       
+     return createPassword.equals(password) && createUsername.equals(name);
+     }
          
         
      
-      public void returnLoginStatus(){
-        if (loginUser()){
-            System.out.println("A Successful Login");
-            }
-        else{
-             System.out.println("A Failed Login");
-        } 
+      public String returnLoginStatus(String UserInputUser,String UserInputPass, String password ,String name){
+          
+          String success=" ";
+          
+          //Decision for message return
+        if (!UserInputUser.matches(name)
+           && UserInputPass.matches(password)){
+            success="A Failed Login";
+             System.out.println(success);
+             System.out.println("Please try ");
+        }
+        else{ success="A Successful Login";
+            System.out.println(success);
+            System.out.println("Welcome"+" "+name+" "+"it is great to see you again");
+           
+           }
+        return success;
       }
-    
 }
